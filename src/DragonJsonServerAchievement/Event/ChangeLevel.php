@@ -17,7 +17,7 @@ class ChangeLevel extends \Zend\EventManager\Event
 	/**
 	 * @var string
 	 */
-	protected $name = 'changelevel';
+	protected $name = 'ChangeLevel';
 
     /**
      * Setzt die Herausforderung deren Level aktualisiert wurde

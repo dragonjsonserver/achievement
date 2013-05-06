@@ -17,7 +17,7 @@ class ChangeAchievement extends \Zend\EventManager\Event
 	/**
 	 * @var string
 	 */
-	protected $name = 'changeachievement';
+	protected $name = 'ChangeAchievement';
 
     /**
      * Setzt die Herausforderung die aktualisiert wurde
