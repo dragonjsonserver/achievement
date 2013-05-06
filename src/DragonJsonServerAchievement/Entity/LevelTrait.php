@@ -12,12 +12,12 @@ namespace DragonJsonServerAchievement\Entity;
 /**
  * Trait für das Attribut mit dem Level einer Herausfoderung
  */
-trait LevelTrait implements \DragonJsonServerAchievement\Entity\LevelInterface
+trait LevelTrait
 {
 	/**
 	 * @Doctrine\ORM\Mapping\Column(type="integer")
 	 **/
-	protected $level;
+	protected $level = 0;
 	
 	/**
 	 * Setzt das Level der Herausforderung
