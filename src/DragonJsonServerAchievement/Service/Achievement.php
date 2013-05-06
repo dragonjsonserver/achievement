@@ -18,7 +18,7 @@ class Achievement
 	use \DragonJsonServer\EventManagerTrait;
 	
 	/**
-	 * Gibt die Gamedesign Konfigurationen für das Achievement zurück
+	 * Gibt die Gamedesign Konfigurationen für die Herausforderung zurück
 	 * @param \DragonJsonServerAchievement\Entity\AchievementInterface $achievement
 	 * @return array 
 	 */
@@ -60,7 +60,7 @@ class Achievement
 	 * @param integer $count
 	 * @return integer $level
 	 */
-	public function getLevel(array $gamedesignConfig, $count)
+	public function getLevelByGamedesignConfigAndCount(array $gamedesignConfig, $count)
 	{
 		$current = 0;
 		foreach ($gamedesignConfig['levels'] as $level => $mincount) {
@@ -73,7 +73,19 @@ class Achievement
 	}
 	
 	/**
-	 * Aktualisiert das Achievement mit den übergebenen Daten
+	 * Gibt das Level für die Herausforderung zurück
+	 * @param \DragonJsonServerAchievement\Entity\AchievementInterface $achievement
+	 * @return integer $level
+	 */
+	public function getLevelByAchievement(\DragonJsonServerAchievement\Entity\AchievementInterface $achievement)
+	{
+		$gamedesignConfig = $this->getGamedesignConfig($achievement);
+		$counttype = $this->getCounttype($gamedesignConfig);
+		return $this->getLevelByGamedesignConfigAndCount($gamedesignConfig, $counttype->getCount($achievement->getData()));
+	}
+	
+	/**
+	 * Aktualisiert die Herausforderung mit den übergebenen Daten
 	 * @param \DragonJsonServerAchievement\Entity\AchievementInterface $achievement
 	 * @param mixed $data
 	 * @return Achievement
@@ -102,9 +114,9 @@ class Achievement
 			);
 			if (isset($gamedesignConfig['levels'])) {
 				if (!isset($old_level)) {
-					$old_level = $this->getLevel($gamedesignConfig, $counttype->getCount($old_data));
+					$old_level = $this->getLevelByGamedesignConfigAndCount($gamedesignConfig, $counttype->getCount($old_data));
 				}
-				$new_level = $this->getLevel($gamedesignConfig, $counttype->getCount($new_data));
+				$new_level = $this->getLevelByGamedesignConfigAndCount($gamedesignConfig, $counttype->getCount($new_data));
 				if ($old_level != $new_level) {
 					if ($achievement instanceof \DragonJsonServerAchievement\Entity\LevelInterface) {
 						$achievement->setLevel($new_level);
