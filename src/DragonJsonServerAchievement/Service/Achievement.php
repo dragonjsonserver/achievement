@@ -84,6 +84,9 @@ class Achievement
 			$gamedesignConfig = $this->getGamedesignConfig($achievement);
 			$counttype = $this->getCounttype($gamedesignConfig);
 			$old_data = $achievement->getData();
+			if (null === $old_data) {
+				$old_data = $counttype->getDefault();
+			}
 			if ($achievement instanceof \DragonJsonServerAchievement\Entity\LevelInterface) {
 				$old_level = $achievement->getLevel();
 			}

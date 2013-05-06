@@ -15,6 +15,15 @@ namespace DragonJsonServerAchievement\Counttype;
 class Addition implements CounttypeInterface
 {
 	/**
+	 * Gibt den Standardwert mit dem gestartet wird zurück
+	 * @return mixed
+	 */
+	public function getDefault()
+	{
+		return 0;
+	}
+	
+	/**
 	 * Fügt zum alten Wert den Wert hinzu und gibt den neuen Wert zurück
 	 * @param mixed $old_data
 	 * @param mixed $data
