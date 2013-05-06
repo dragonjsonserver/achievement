@@ -91,6 +91,9 @@ class Achievement
 				$old_level = $achievement->getLevel();
 			}
 			$new_data = $counttype->addData($old_data, $data);
+			if ($old_data == $new_data) {
+				return;
+			}
 			$achievement->setData($new_data);
 			$this->getEventManager()->trigger(
 				(new \DragonJsonServerAchievement\Event\ChangeAchievement())
