@@ -14,6 +14,9 @@ namespace DragonJsonServerAchievement\Entity;
  */
 abstract class AbstractAchievement implements \DragonJsonServerAchievement\Entity\AchievementInterface
 {
+	use \DragonJsonServerDoctrine\Entity\ModifiedTrait;
+	use \DragonJsonServerDoctrine\Entity\CreatedTrait;
+	
 	/**
 	 * @Doctrine\ORM\Mapping\Column(type="string")
 	 **/
@@ -70,9 +73,15 @@ abstract class AbstractAchievement implements \DragonJsonServerAchievement\Entit
 	 */
 	public function toArray()
 	{
+		$array = [];
+		if ($this instanceof \DragonJsonServerAchievement\Entity\LevelInterface) {
+			$array['level'] = $this->getLevel(); 
+		}
 		return [
+			'modified' => $this->getModifiedTimestamp(),
+			'created' => $this->getCreatedTimestamp(),
 			'gamedesign_identifier' => $this->getGamedesignIdentifier(),
 			'data' => $this->getData(),
-		];
+		] + $array;
 	}
 }
