@@ -68,7 +68,24 @@ abstract class AbstractAchievement implements \DragonJsonServerAchievement\Entit
 	}
 	
 	/**
-	 * Gibt die Attribute des Avatars als Array zurück
+	 * Setzt die Attribute der Herausforderung aus dem Array
+	 * @param array $array
+	 * @return AbstractAchievement
+	 */
+	public function fromArray(array $array)
+	{
+		if ($this instanceof \DragonJsonServerAchievement\Entity\LevelInterface) {
+			$this->setLevel($array['level']);
+		}
+		return $this
+			->setModifiedTimestamp($array['modified'])
+			->setCreatedTimestamp($array['created'])
+			->getGamedesignIdentifier($array['gamedesign_identifier'])
+			->getData($array['data']);
+	}
+	
+	/**
+	 * Gibt die Attribute der Herausforderung als Array zurück
 	 * @return array
 	 */
 	public function toArray()
@@ -78,6 +95,7 @@ abstract class AbstractAchievement implements \DragonJsonServerAchievement\Entit
 			$array['level'] = $this->getLevel(); 
 		}
 		return [
+			'__className' => __CLASS__,
 			'modified' => $this->getModifiedTimestamp(),
 			'created' => $this->getCreatedTimestamp(),
 			'gamedesign_identifier' => $this->getGamedesignIdentifier(),
