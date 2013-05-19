@@ -92,7 +92,7 @@ class Achievement
 	 */
 	public function changeAchievement(\DragonJsonServerAchievement\Entity\AchievementInterface $achievement, $data)
 	{
-		$this->getServiceManager()->get('Doctrine')->transactional(function ($entityManager) use ($achievement, $data) {
+		$this->getServiceManager()->get('\DragonJsonServerDoctrine\Service\Doctrine')->transactional(function ($entityManager) use ($achievement, $data) {
 			$gamedesignConfig = $this->getGamedesignConfig($achievement);
 			$counttype = $this->getCounttype($gamedesignConfig);
 			$old_data = $achievement->getData();

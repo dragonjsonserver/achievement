@@ -26,7 +26,7 @@ return [
 	],
 	'service_manager' => [
 		'invokables' => [
-            'Achievement' => '\DragonJsonServerAchievement\Service\Achievement',
+            '\DragonJsonServerAchievement\Service\Achievement' => '\DragonJsonServerAchievement\Service\Achievement',
 		],
 	],
 ];
